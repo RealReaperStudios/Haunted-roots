@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Haunted Roots</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <div class="fog-container">
@@ -43,12 +44,32 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Haunted Roots, <a href="https://realreaperstudios.github.io/reaperfilms/">Reaper Studios</a>. All rights reserved.</p>
-            <p class="subtle-hint">There are secrets waiting to be found...</p>
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="https://www.youtube.com/@ReaperFilmz362" class="social-link" aria-label="YouTube">
+                        <i data-lucide="youtube"></i>
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=B0Vp5XGRujI" class="social-link" aria-label="YouTube">
+                        <i data-lucide="youtube"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Instagram">
+                        <i data-lucide="instagram"></i>
+                    </a>
+                    <a href="https://www.patreon.com/ReaperStudiosYT" class="social-link" aria-label="Patreon">
+                        <i data-lucide="heart"></i>
+                    </a>
+                </div>
+                <p>&copy; 2025 Haunted Roots, <a href="https://realreaperstudios.github.io/reaperfilms/">Reaper Studios</a>. All rights reserved.</p>
+                <p class="subtle-hint">There are secrets waiting to be found...</p>
+            </div>
         </div>
     </footer>
 
     <script src="story.js"></script>
     <script src="app.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
 </body>
 </html>
