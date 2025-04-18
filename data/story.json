@@ -1,7 +1,7 @@
 {
     "title": "Haunted Roots",
     "subtitle": "The Forgotten Memories of Blackwood Manor",
-    "poster": "https://images.pexels.com/photos/5273641/pexels-photo-5273641.jpeg",
+    "poster": "../images/haunted-roots.png",
     "chapters": [
       {
         "id": 1,
