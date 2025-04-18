@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haunted Roots</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="fog-container">
+        <div class="fog"></div>
+    </div>
+
+    <header>
+        <div class="container">
+            <h1>Haunted Roots</h1>
+            <div class="progress-indicator">
+                <span id="found-count">0</span>
+                <span class="separator">/</span>
+                <span id="total-count">0</span>
+                <span class="label">secrets found</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="poster">
+            <img src="https://images.pexels.com/photos/5273641/pexels-photo-5273641.jpeg" alt="Haunted mansion at twilight">
+        </div>
+        
+        <div class="story-content">
+            <h2 id="chapter-title"></h2>
+            <div id="chapter-content"></div>
+        </div>
+
+        <div id="hidden-messages"></div>
+
+        <div class="chapter-navigation">
+            <button id="prev-chapter" onclick="previousChapter()">Previous Chapter</button>
+            <button id="next-chapter" onclick="nextChapter()">Next Chapter</button>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Haunted Roots, <a href="https://realreaperstudios.github.io/reaperfilms/">Reaper Studios. All rights reserved.</a></p>
+            <p class="subtle-hint">There are secrets waiting to be found...</p>
+        </div>
+    </footer>
+
+    <script src="story.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
