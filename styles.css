@@ -7,6 +7,7 @@
     --color-text-secondary: #a0a0a7;
     --color-accent-purple: #523c7d;
     --color-highlight: #c7a555;
+    --color-error: #e53e3e;
     
     --font-display: 'Playfair Display', serif;
     --font-heading: 'Bitter', serif;
@@ -111,6 +112,14 @@ h2 {
     white-space: pre-wrap;
 }
 
+.error {
+    color: var(--color-error);
+    padding: var(--spacing-md);
+    border-left: 3px solid var(--color-error);
+    background-color: rgba(229, 62, 62, 0.1);
+    border-radius: 0 4px 4px 0;
+}
+
 .highlighted-text {
     display: inline;
     background-color: rgba(199, 165, 85, 0.2);
@@ -122,6 +131,11 @@ h2 {
 
 .highlighted-text:hover {
     background-color: rgba(199, 165, 85, 0.3);
+}
+
+.highlighted-text.found {
+    background-color: rgba(199, 165, 85, 0.4);
+    border-bottom-style: solid;
 }
 
 .hidden-message {
@@ -158,7 +172,7 @@ button {
     transition: all 0.3s ease;
 }
 
-button:hover {
+button:hover:not(:disabled) {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -201,17 +215,6 @@ footer {
     background-color: var(--color-highlight);
     color: var(--color-background);
     transform: translateY(-2px);
-}
-
-.social-link i {
-    width: 20px;
-    height: 20px;
-}
-
-.subtle-hint {
-    color: var(--color-text-secondary);
-    font-style: italic;
-    margin-top: var(--spacing-sm);
 }
 
 .fog-container {

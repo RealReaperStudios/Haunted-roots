@@ -1,7 +1,9 @@
 let currentChapter = 1;
+let story = null;
 const foundMessages = new Set(JSON.parse(localStorage.getItem('hauntedRoots_foundMessages') || '[]'));
 
 function updateProgressIndicator() {
+    if (!story) return;
     const totalMessages = story.chapters.reduce((total, chapter) => 
         total + chapter.hiddenMessages.length, 0);
     
@@ -10,6 +12,7 @@ function updateProgressIndicator() {
 }
 
 function displayChapter(chapterId) {
+    if (!story) return;
     const chapter = story.chapters.find(ch => ch.id === chapterId);
     if (!chapter) return;
 
@@ -20,7 +23,8 @@ function displayChapter(chapterId) {
             msg.trigger.toLowerCase() === word.toLowerCase().replace(/[.,!?]/g, ''));
         
         if (hiddenMessage) {
-            return `<span class="highlighted-text" data-message-id="${hiddenMessage.id}">${word}</span>`;
+            const messageFound = foundMessages.has(hiddenMessage.id);
+            return `<span class="highlighted-text ${messageFound ? 'found' : ''}" data-message-id="${hiddenMessage.id}">${word}</span>`;
         }
         return word;
     }).join(' ');
@@ -38,9 +42,20 @@ function displayChapter(chapterId) {
     
     // Clear previous hidden messages
     document.getElementById('hidden-messages').innerHTML = '';
+
+    // Show already found messages
+    chapter.hiddenMessages.forEach(msg => {
+        if (foundMessages.has(msg.id)) {
+            const messageElement = document.createElement('div');
+            messageElement.className = 'hidden-message visible';
+            messageElement.textContent = msg.message;
+            document.getElementById('hidden-messages').appendChild(messageElement);
+        }
+    });
 }
 
 function revealHiddenMessage(event) {
+    if (!story) return;
     const messageId = event.target.dataset.messageId;
     const chapter = story.chapters.find(ch => 
         ch.hiddenMessages.some(msg => msg.id === messageId));
@@ -59,6 +74,7 @@ function revealHiddenMessage(event) {
     messageElement.textContent = hiddenMessage.message;
     
     document.getElementById('hidden-messages').appendChild(messageElement);
+    event.target.classList.add('found');
     
     // Trigger animation
     setTimeout(() => messageElement.classList.add('visible'), 10);
@@ -81,7 +97,23 @@ function nextChapter() {
 }
 
 // Initialize the page
-document.addEventListener('DOMContentLoaded', () => {
-    updateProgressIndicator();
-    displayChapter(currentChapter);
-});
+async function initializeStory() {
+    try {
+        const response = await fetch('.//data/story.json');
+        if (!response.ok) throw new Error('Failed to load story data');
+        story = await response.json();
+        
+        // Set the title and subtitle
+        document.querySelector('h1').textContent = story.title;
+        document.querySelector('.poster img').src = story.poster;
+        
+        updateProgressIndicator();
+        displayChapter(currentChapter);
+    } catch (error) {
+        console.error('Error loading story:', error);
+        document.getElementById('chapter-content').innerHTML = 
+            '<p class="error">Failed to load story. Please try refreshing the page.</p>';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', initializeStory);
