@@ -78,19 +78,19 @@
         "content": "Perched on a hillside overlooking the town, the cemetery is filled with crooked headstones, some so old the engravings have eroded. The wrought-iron gate creaks as it opens, and a narrow dirt path leads visitors through rows of graves marked with symbols from the 19th century. Tall willow trees droop like sentinels, their long branches swaying gently, adding an air of reverence.",
         "hiddenMessages": [
           {
-            "id": "hidden-6",
+            "id": "hidden-9",
             "trigger": "cemetery",
             "message": "They weren't erased. They were removed from existence.",
             "found": false
           },
           {
-            "id": "hidden-7",
+            "id": "hidden-10",
             "trigger": "wrought-iron",
             "message": "The symbols mark those who tried to escape. None succeeded.",
             "found": false
           },
           {
-            "id": "hidden-8",
+            "id": "hidden-11",
             "trigger": "sentinels",
             "message": "The footsteps belong to your great-aunt Eliza. She's been searching for someone to pass her burden to.",
             "found": false
