@@ -80,19 +80,19 @@
           {
             "id": "hidden-9",
             "trigger": "cemetery",
-            "message": "They weren't erased. They were removed from existence.",
+            "message": "...",
             "found": false
           },
           {
             "id": "hidden-10",
             "trigger": "wrought-iron",
-            "message": "The symbols mark those who tried to escape. None succeeded.",
+            "message": "......",
             "found": false
           },
           {
             "id": "hidden-11",
             "trigger": "sentinels",
-            "message": "The footsteps belong to your great-aunt Eliza. She's been searching for someone to pass her burden to.",
+            "message": ".........",
             "found": false
           }
         ]
