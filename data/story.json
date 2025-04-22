@@ -29,7 +29,7 @@
         "hiddenMessages": [
           {
             "id": "hidden-3",
-            "trigger": "Willow Holler",
+            "trigger": "Willow",
             "message": "The whispers are the voices of those who died here. They know your true purpose.",
             "found": false
           },
