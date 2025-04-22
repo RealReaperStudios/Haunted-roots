@@ -71,6 +71,37 @@
             "found": false
           }
         ]
+      },
+      {
+        "id": 4,
+        "title": "The Cemetery",
+        "content": "Perched on a hillside overlooking the town, the cemetery is filled with crooked headstones, some so old the engravings have eroded. The wrought-iron gate creaks as it opens, and a narrow dirt path leads visitors through rows of graves marked with symbols from the 19th century. Tall willow trees droop like sentinels, their long branches swaying gently, adding an air of reverence.",
+        "hiddenMessages": [
+          {
+            "id": "hidden-9",
+            "trigger": "cemetery",
+            "message": "...",
+            "found": false
+          },
+          {
+            "id": "hidden-10",
+            "trigger": "wrought-iron",
+            "message": "......",
+            "found": false
+          },
+          {
+            "id": "hidden-11",
+            "trigger": "sentinels",
+            "message": ".........",
+            "found": false
+          },
+          {
+            "id": "hidden-12",
+            "trigger": "reverence",
+            "message": ".............",
+            "found": false
+          }
+        ]
       }
     ]
   }
