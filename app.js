@@ -18,16 +18,22 @@ function displayChapter(chapterId) {
 
     document.getElementById('chapter-title').textContent = chapter.title;
     
-    const content = chapter.content.split(' ').map(word => {
-        const hiddenMessage = chapter.hiddenMessages.find(msg => 
-            msg.trigger.toLowerCase() === word.toLowerCase().replace(/[.,!?]/g, ''));
-        
-        if (hiddenMessage) {
-            const messageFound = foundMessages.has(hiddenMessage.id);
-            return `<span class="highlighted-text ${messageFound ? 'found' : ''}" data-message-id="${hiddenMessage.id}">${word}</span>`;
+    // Split by spaces but preserve punctuation
+    const words = chapter.content.match(/\S+|\s+/g) || [];
+    const content = words.map(word => {
+        // Only check for triggers on actual words, not whitespace
+        if (word.trim()) {
+            const cleanWord = word.toLowerCase().replace(/[.,!?]/g, '');
+            const hiddenMessage = chapter.hiddenMessages.find(msg => 
+                msg.trigger.toLowerCase() === cleanWord);
+            
+            if (hiddenMessage) {
+                const messageFound = foundMessages.has(hiddenMessage.id);
+                return `<span class="highlighted-text ${messageFound ? 'found' : ''}" data-message-id="${hiddenMessage.id}">${word}</span>`;
+            }
         }
         return word;
-    }).join(' ');
+    }).join('');
     
     document.getElementById('chapter-content').innerHTML = content;
     
@@ -37,7 +43,10 @@ function displayChapter(chapterId) {
     
     // Add click listeners to highlighted words
     document.querySelectorAll('.highlighted-text').forEach(element => {
-        element.addEventListener('click', revealHiddenMessage);
+        if (!element.hasAttribute('data-listener')) {
+            element.setAttribute('data-listener', 'true');
+            element.addEventListener('click', revealHiddenMessage);
+        }
     });
     
     // Clear previous hidden messages
@@ -57,6 +66,8 @@ function displayChapter(chapterId) {
 function revealHiddenMessage(event) {
     if (!story) return;
     const messageId = event.target.dataset.messageId;
+    if (!messageId) return;
+
     const chapter = story.chapters.find(ch => 
         ch.hiddenMessages.some(msg => msg.id === messageId));
     
@@ -74,7 +85,10 @@ function revealHiddenMessage(event) {
     messageElement.textContent = hiddenMessage.message;
     
     document.getElementById('hidden-messages').appendChild(messageElement);
-    event.target.classList.add('found');
+    
+    // Mark all instances of this trigger word as found
+    document.querySelectorAll(`.highlighted-text[data-message-id="${messageId}"]`)
+        .forEach(el => el.classList.add('found'));
     
     // Trigger animation
     setTimeout(() => messageElement.classList.add('visible'), 10);
@@ -103,9 +117,17 @@ async function initializeStory() {
         if (!response.ok) throw new Error('Failed to load story data');
         story = await response.json();
         
+        if (!story || !Array.isArray(story.chapters)) {
+            throw new Error('Invalid story data format');
+        }
+        
         // Set the title and subtitle
         document.querySelector('h1').textContent = story.title;
-        document.querySelector('.poster img').src = story.poster;
+        
+        const posterImg = document.querySelector('.poster img');
+        if (posterImg && story.poster) {
+            posterImg.src = story.poster;
+        }
         
         updateProgressIndicator();
         displayChapter(currentChapter);
